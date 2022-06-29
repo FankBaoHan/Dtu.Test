@@ -47,14 +47,6 @@ namespace DTU.Test.IO.Impl
 
             ValidateNumberOfPoints("访问寄存器数量错误", numberOfPoints, 2000);
 
-            var buffer = ModbusTransfer(
-                slaveAddress, 
-                startAddress, 
-                numberOfPoints, 
-                MyModbusUtil.FunctionCode.Read03, 
-                null, 
-                out len
-                );
 
             return MyModbusUtil.ByteArray2UShortArray(buffer, len)?.ToArray();
         }
@@ -89,29 +81,7 @@ namespace DTU.Test.IO.Impl
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// 写单个寄存器
-        /// </summary>
-        /// <param name="slaveAddress"></param>
-        /// <param name="registerAddress"></param>
-        /// <param name="value"></param>
-        public void WriteSingleRegister(byte slaveAddress, ushort registerAddress, ushort[] value)
         {
-            int len = 0;
-
-            var buffer = ModbusTransfer(
-                slaveAddress,
-                0,
-                0,
-                MyModbusUtil.FunctionCode.Write03,
-                value,
-                out len
-                );
-
-            if (buffer == null)
-                throw new Exception("写单寄存器失败");
-
-            CommonUtils.AddLog("写单寄存器[" + registerAddress.ToString() + "]完成");
         }
 
         /// <summary>
@@ -120,30 +90,15 @@ namespace DTU.Test.IO.Impl
         /// <param name="slaveAddress"></param>
         /// <param name="startAddress"></param>
         /// <param name="numberOfPoints"></param>
-        /// <param name="functionCode"></param>
-        /// <param name="data"></param>
-        /// <param name="len"></param>
         /// <returns></returns>
-        private byte[] ModbusTransfer(byte slaveAddress, 
-            ushort startAddress, 
-            ushort numberOfPoints, 
-            MyModbusUtil.FunctionCode functionCode, 
-            ushort[] data,
-            out int len)
         {
             byte[] buffer = new byte[1024];
             Byte[] cmd = null;
             len = 0;
 
-            switch (functionCode)
-            {
-                //读保持寄存器
-                case MyModbusUtil.FunctionCode.Read03:
-                    cmd = MyModbusUtil.GetReadCmd(
-                    slaveAddress,
-                    functionCode,
-                    startAddress,
-                    numberOfPoints);
+                slaveAddress,
+                startAddress,
+                numberOfPoints);
                     break;
 
                 //写单寄存器
@@ -187,7 +142,6 @@ namespace DTU.Test.IO.Impl
                 return null;
             }
 
-            return MyModbusUtil.GetData(buffer, len, functionCode);
         }
 
         /// <summary>

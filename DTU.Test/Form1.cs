@@ -215,8 +215,8 @@ namespace DTU.Test
                     //Modbus IO
                     lock(socketDtu)
                     {
-                        dtu.ReadData(rtu);
-                    }
+                    dtu.ReadData(rtu);
+                }
                 }
 
                 Thread.Sleep(dtu.QueryTime * 1000);
