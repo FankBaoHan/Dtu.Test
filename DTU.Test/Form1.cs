@@ -238,10 +238,10 @@ namespace DTU.Test
             {
 
                 //演示4个保持寄存器
-                tb401.Text = hd[0].ToString();
-                tb402.Text = hd[1].ToString();
-                tb403.Text = hd[2].ToString();
-                tb404.Text = hd[3].ToString();
+                n401.Value = hd[0];
+                n402.Value = hd[1];
+                n403.Value = hd[2];
+                n404.Value = hd[3];
 
                 lbTime.Text = DateTime.Now.ToString();
             }
@@ -261,7 +261,7 @@ namespace DTU.Test
 
             var dtu = new DTUDevice(sn, (byte)nSlave.Value, (int)nTime.Value);
 
-            //测试保持寄存器点,自动打包
+            //寄存器配置,自动打包
             dtu.HoldingRegisters.Add(0, 0);
             dtu.HoldingRegisters.Add(1, 0);
             dtu.HoldingRegisters.Add(2, 0);
@@ -299,7 +299,7 @@ namespace DTU.Test
         }
 
         /// <summary>
-        /// 401写入
+        /// 401写入测试
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -307,13 +307,9 @@ namespace DTU.Test
         {
             Socket socketDtu = socketDtus.Count>0?socketDtus[0]:null;
             DTUDevice dtu = DTUs.ContainsKey(tbSerial.Text)?DTUs[tbSerial.Text]:null;
-            ushort[] data = new ushort[1];
-
-            if (!string.IsNullOrEmpty(tb401.Text))
-                data[0] = ushort.Parse(tb401.Text);
-                
-
-            if (socketDtu != null && dtu != null && data.Length>0)
+            ushort[] data = { (ushort)n401.Value };
+            
+            if (socketDtu != null && dtu != null)
             {
                 new Thread(() => { 
                     lock(socketDtu)
@@ -345,6 +341,11 @@ namespace DTU.Test
         {
             rtbLog.SelectionStart = rtbLog.Text.Length;
             rtbLog.ScrollToCaret();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
