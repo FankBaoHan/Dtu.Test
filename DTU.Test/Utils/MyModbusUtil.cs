@@ -160,8 +160,6 @@ namespace DTU.Test.Utils
             }
             
             return receiveMsg.Skip(3).Take(length - 5).ToArray();
-
-
         }
 
         public static List<ushort> ByteArray2UShortArray(byte[] byteArr, int len)
