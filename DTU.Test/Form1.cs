@@ -153,7 +153,8 @@ namespace DTU.Test
         private void Receive(Object socket)
         {
             var socketDtu = (Socket)socket;
-            socketDtu.SetSocketOption(SocketOptionLevel.Socket, 
+            socketDtu.SetSocketOption(
+                SocketOptionLevel.Socket, 
                 SocketOptionName.ReceiveTimeout, 
                 REPEAT_ASK_TIME * 1000);
 
@@ -163,7 +164,7 @@ namespace DTU.Test
             byte[] buffer = new byte[1024];
 
             //rtu可以看作socket的modbus rtu包装
-            ModbusRTU rtu = new ModbusRTU(socketDtu);
+            var rtu = new ModbusRTU(socketDtu);
 
             while (true)
             {
@@ -205,7 +206,7 @@ namespace DTU.Test
 
                     bFirst = false;
                     dtu = DTUs[sNoReceive];
-                    dtu.whenRefreshHoldingRegister += SetText;
+                    dtu.whenRefreshInputRegister += SetText;
 
                     CommonUtils.AddLog("DTU连接成功 SN->" + sNoReceive);
                     continue;
@@ -215,8 +216,8 @@ namespace DTU.Test
                     //Modbus IO
                     lock(socketDtu)
                     {
-                    dtu.ReadData(rtu);
-                }
+                        dtu.ReadData(rtu);
+                    }
                 }
 
                 Thread.Sleep(dtu.QueryTime * 1000);
@@ -231,7 +232,7 @@ namespace DTU.Test
         {
             if (this.InvokeRequired)
             {
-                RefreshHoldingRegisterDelegate d = new RefreshHoldingRegisterDelegate(SetText);
+                RefreshRegisterDelegate d = new RefreshRegisterDelegate(SetText);
                 this.Invoke(d, new object[] { hd });
             }
             else
@@ -242,6 +243,14 @@ namespace DTU.Test
                 n402.Value = hd[1];
                 n403.Value = hd[2];
                 n404.Value = hd[3];
+
+                //根据协议打印水准仪数据
+                var level = MyModbusUtil.UShortArray2Float(new ushort[] { hd[0], hd[1] });
+                var temprature = MyModbusUtil.UShortArray2Float(new ushort[] { hd[2], hd[3] });
+                var pressure = MyModbusUtil.UShortArray2Float(new ushort[] { hd[4], hd[5] });
+                CommonUtils.AddLog("液位：" + level + " mm");
+                CommonUtils.AddLog("水温：" + temprature + " ℃");
+                CommonUtils.AddLog("水压：" + pressure + " Pa");
 
                 lbTime.Text = DateTime.Now.ToString();
             }
@@ -254,7 +263,8 @@ namespace DTU.Test
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            string sn = tbSerial.Text = CommonUtils.GetSn();
+            //string sn = tbSerial.Text = CommonUtils.GetSn();
+            string sn = tbSerial.Text = "TESTSN";
 
             //Demo中只演示1个DTU
             DTUs.Clear();
@@ -262,14 +272,14 @@ namespace DTU.Test
             var dtu = new DTUDevice(sn, (byte)nSlave.Value, (int)nTime.Value);
 
             //寄存器配置,自动打包
-            dtu.HoldingRegisters.Add(0, 0);
-            dtu.HoldingRegisters.Add(1, 0);
-            dtu.HoldingRegisters.Add(2, 0);
-            dtu.HoldingRegisters.Add(3, 0);
-            dtu.HoldingRegisters.Add(4, 0);
-            dtu.HoldingRegisters.Add(9, 0);
-            dtu.HoldingRegisters.Add(10, 0);
-            //dtu.HoldingRegisters.Add(110, 0);
+            dtu.InputRegisters.Add(0, 0);
+            dtu.InputRegisters.Add(1, 0);
+            dtu.InputRegisters.Add(2, 0);
+            dtu.InputRegisters.Add(3, 0);
+            dtu.InputRegisters.Add(4, 0);
+            dtu.InputRegisters.Add(5, 0);
+            //dtu.InputRegisters.Add(6, 0);
+            //dtu.InputRegisters.Add(110, 0);
 
             DTUs.Add(sn, dtu);
         }
@@ -341,11 +351,6 @@ namespace DTU.Test
         {
             rtbLog.SelectionStart = rtbLog.Text.Length;
             rtbLog.ScrollToCaret();
-        }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

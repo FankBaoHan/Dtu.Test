@@ -69,14 +69,14 @@ namespace DTU.Test.Models
         /// <param name="rtu"></param>
         public void ReadData(ModbusRTU rtu)
         {
-            #region 保持寄存器
-            if (HoldingRegisters.Count > 0)
+            #region 输入寄存器
+            if (InputRegisters.Count > 0)
             {
                 //访问包参数 <startAddress,numberOfPoints>
-                Dictionary<ushort, ushort> cmdPara = new Dictionary<ushort, ushort>();
+                var cmdPara = new Dictionary<ushort, ushort>();
 
                 //组包规则
-                var hAdds = HoldingRegisters.Keys.ToList();
+                var hAdds = InputRegisters.Keys.ToList();
                 ushort startAddress = hAdds[0], numberOfPoints = 1;
 
                 for (ushort i = 0; i < hAdds.Count; i++)
@@ -100,17 +100,18 @@ namespace DTU.Test.Models
                 //IO赋值
                 foreach (var key in cmdPara.Keys)
                 {
-                    var data = rtu.ReadHoldingRegisters(SlaveID, key, cmdPara[key]);
+                    var data = rtu.ReadInputRegisters(SlaveID, key, cmdPara[key]);
 
                     if (data != null)
                     {
                         for (ushort i = 0; i < data.Length; i++)
                         {
                             var pos = i + key;
-                            RefreshHoldingRegister((ushort)pos, data[i]);
+                            InputRegisters[(ushort)pos] = data[i];
                         }
 
-                        CommonUtils.AddLog("读保持寄存器->解析报文完成");
+                        RefreshInputRegister();
+                        CommonUtils.AddLog("读输入寄存器->解析报文完成");
                     }
                 }
 
@@ -121,21 +122,34 @@ namespace DTU.Test.Models
         /// <summary>
         /// 更新保持寄存器的回调
         /// </summary>
-        public delegate void RefreshHoldingRegisterDelegate(SortedDictionary<ushort,ushort> hd);
-        public RefreshHoldingRegisterDelegate whenRefreshHoldingRegister;
+        public delegate void RefreshRegisterDelegate(SortedDictionary<ushort,ushort> hd);
+        public RefreshRegisterDelegate whenRefreshHoldingRegister;
+        public RefreshRegisterDelegate whenRefreshInputRegister;
 
         /// <summary>
         /// 更新保持寄存器
         /// </summary>
         /// <param name="add"></param>
         /// <param name="data"></param>
-        private void RefreshHoldingRegister(ushort add, ushort data)
+        private void RefreshHoldingRegister()
         {
-            HoldingRegisters[add] = data;
-
             if (whenRefreshHoldingRegister != null)
             {
                 whenRefreshHoldingRegister.Invoke(HoldingRegisters);
+            }
+        }
+
+
+        /// <summary>
+        /// 更新输入寄存器
+        /// </summary>
+        /// <param name="add"></param>
+        /// <param name="data"></param>
+        private void RefreshInputRegister()
+        {
+            if (whenRefreshInputRegister != null)
+            {
+                whenRefreshInputRegister.Invoke(InputRegisters);
             }
         }
 

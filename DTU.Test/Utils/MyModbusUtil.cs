@@ -162,6 +162,12 @@ namespace DTU.Test.Utils
             return receiveMsg.Skip(3).Take(length - 5).ToArray();
         }
 
+        /// <summary>
+        /// Byte数组转UShort(UInt16)数组
+        /// </summary>
+        /// <param name="byteArr"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
         public static List<ushort> ByteArray2UShortArray(byte[] byteArr, int len)
         {
             if (byteArr == null || len == 0 || byteArr.Length == 0)
@@ -185,5 +191,68 @@ namespace DTU.Test.Utils
 
             return regList;
         }
+
+        /// <summary>
+        /// Byte数组转Float数组(ABCD排列)
+        /// </summary>
+        /// <param name="byteArr"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public static List<float> ByteArray2FloatArray(byte[] byteArr, int len)
+        {
+            if (byteArr == null || len == 0 || byteArr.Length == 0)
+            {
+                //CommonUtils.AddLog("ByteArray2FloatArray->Modbus数据为空");
+                return null;
+            }
+
+            if ((len - 3) % 4 != 0)
+            {
+                CommonUtils.AddLog("ByteArray2FloatArray->Modbus寄存器数据数量错误");
+                return null;
+            }
+
+            var regList = new List<float>();
+
+            for (int i = 0; i < byteArr.Length; i = i + 4)
+            {
+                regList.Add(
+                    BitConverter.ToSingle(new byte[] 
+                    { 
+                        byteArr[i],
+                        byteArr[i+1], 
+                        byteArr[i + 2], 
+                        byteArr[i + 3] 
+                    }, 0));
+            }
+
+            return regList;
+        }
+
+        /// <summary>
+        /// UShort数组（1对）转float(ABCD)
+        /// </summary>
+        /// <param name="ushortArr"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public static float UShortArray2Float(ushort[] ushortArr)
+        {
+            var byteArr = UShortArray2ByteArray(ushortArr);
+            return BitConverter.ToSingle(new byte[] { byteArr[2], byteArr[3], byteArr[0], byteArr[1] }, 0);
+        }
+
+        /// <summary>
+        /// UShort(UInt16)数组转Byte数组
+        /// </summary>
+        /// <param name="ushortArr"></param>
+        /// <returns></returns>
+        public static byte[] UShortArray2ByteArray(ushort[] ushortArr)
+        {
+            byte[] target = new byte[ushortArr.Length * 2];
+            Buffer.BlockCopy(ushortArr, 0, target, 0, ushortArr.Length * 2);
+
+            return target;
+        }
+
     }
 }

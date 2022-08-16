@@ -59,10 +59,30 @@ namespace DTU.Test.IO.Impl
 
             return MyModbusUtil.ByteArray2UShortArray(buffer, len)?.ToArray();
         }
-
+        
+        /// <summary>
+        /// 读输入寄存器
+        /// </summary>
+        /// <param name="slaveAddress"></param>
+        /// <param name="startAddress"></param>
+        /// <param name="numberOfPoints"></param>
+        /// <returns></returns>
         public ushort[] ReadInputRegisters(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
         {
-            throw new NotImplementedException();
+            int len = 0;
+
+            ValidateNumberOfPoints("访问寄存器数量错误", numberOfPoints, 2000);
+
+            var buffer = ModbusTransfer(
+                slaveAddress,
+                startAddress,
+                numberOfPoints,
+                MyModbusUtil.FunctionCode.Read04,
+                null,
+                out len
+                );
+
+            return MyModbusUtil.ByteArray2UShortArray(buffer, len)?.ToArray();
         }
 
         public bool[] ReadInputs(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
@@ -125,7 +145,8 @@ namespace DTU.Test.IO.Impl
         /// <param name="data"></param>
         /// <param name="len"></param>
         /// <returns></returns>
-        private byte[] ModbusTransfer(byte slaveAddress,
+        private byte[] ModbusTransfer(
+            byte slaveAddress,
             ushort startAddress,
             ushort numberOfPoints,
             MyModbusUtil.FunctionCode functionCode,
@@ -133,7 +154,7 @@ namespace DTU.Test.IO.Impl
             out int len)
         {
             byte[] buffer = new byte[1024];
-            Byte[] cmd = null;
+            byte[] cmd = null;
             len = 0;
 
             switch (functionCode)
@@ -153,6 +174,15 @@ namespace DTU.Test.IO.Impl
                             slaveAddress,
                             startAddress,
                             data[0]);
+                    break;
+
+                //读输入寄存器
+                case MyModbusUtil.FunctionCode.Read04:
+                    cmd = MyModbusUtil.GetReadCmd(
+                    slaveAddress,
+                    functionCode,
+                    startAddress,
+                    numberOfPoints);
                     break;
 
                 default:
@@ -190,6 +220,7 @@ namespace DTU.Test.IO.Impl
 
             return MyModbusUtil.GetData(buffer, len, functionCode);
         }
+
         /// <summary>
         /// 访问寄存器合法性判断
         /// </summary>

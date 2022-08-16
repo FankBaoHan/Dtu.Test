@@ -86,7 +86,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(10, 20, 10, 10);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10, 30, 10, 10);
-            this.panel1.Size = new System.Drawing.Size(296, 986);
+            this.panel1.Size = new System.Drawing.Size(296, 1205);
             this.panel1.TabIndex = 0;
             // 
             // groupBox3
@@ -104,10 +104,10 @@
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(10, 458);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(276, 518);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(276, 737);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "寄存器读写演示";
@@ -115,7 +115,7 @@
             // n404
             // 
             this.n404.Location = new System.Drawing.Point(48, 450);
-            this.n404.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.n404.Margin = new System.Windows.Forms.Padding(4);
             this.n404.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -129,7 +129,7 @@
             // n403
             // 
             this.n403.Location = new System.Drawing.Point(48, 358);
-            this.n403.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.n403.Margin = new System.Windows.Forms.Padding(4);
             this.n403.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -143,7 +143,7 @@
             // n402
             // 
             this.n402.Location = new System.Drawing.Point(48, 264);
-            this.n402.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.n402.Margin = new System.Windows.Forms.Padding(4);
             this.n402.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -157,7 +157,7 @@
             // n401
             // 
             this.n401.Location = new System.Drawing.Point(48, 164);
-            this.n401.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.n401.Margin = new System.Windows.Forms.Padding(4);
             this.n401.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -169,8 +169,9 @@
             // 
             // button5
             // 
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(174, 164);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 42);
             this.button5.TabIndex = 11;
@@ -207,7 +208,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(70, 24);
             this.label12.TabIndex = 14;
-            this.label12.Text = "40004";
+            this.label12.Text = "30004";
             // 
             // label13
             // 
@@ -217,7 +218,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(70, 24);
             this.label13.TabIndex = 13;
-            this.label13.Text = "40003";
+            this.label13.Text = "30003";
             // 
             // label14
             // 
@@ -227,7 +228,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(70, 24);
             this.label14.TabIndex = 10;
-            this.label14.Text = "40002";
+            this.label14.Text = "30002";
             // 
             // label15
             // 
@@ -237,7 +238,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(70, 24);
             this.label15.TabIndex = 9;
-            this.label15.Text = "40001";
+            this.label15.Text = "30001";
             // 
             // groupBox2
             // 
@@ -250,7 +251,7 @@
             this.groupBox2.Location = new System.Drawing.Point(10, 294);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 30, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(276, 164);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
@@ -269,7 +270,7 @@
             // nTime
             // 
             this.nTime.Location = new System.Drawing.Point(128, 96);
-            this.nTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nTime.Margin = new System.Windows.Forms.Padding(4);
             this.nTime.Maximum = new decimal(new int[] {
             3600,
             0,
@@ -302,7 +303,7 @@
             // nSlave
             // 
             this.nSlave.Location = new System.Drawing.Point(128, 44);
-            this.nSlave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nSlave.Margin = new System.Windows.Forms.Padding(4);
             this.nSlave.Maximum = new decimal(new int[] {
             255,
             0,
@@ -345,7 +346,7 @@
             this.groupBox1.Location = new System.Drawing.Point(10, 30);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 30, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(276, 264);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
@@ -354,7 +355,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(96, 198);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(150, 46);
             this.button3.TabIndex = 6;
@@ -375,7 +376,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(176, 84);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(76, 46);
             this.button2.TabIndex = 3;
@@ -386,7 +387,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(96, 84);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(76, 46);
             this.button1.TabIndex = 2;
@@ -397,7 +398,7 @@
             // nPort
             // 
             this.nPort.Location = new System.Drawing.Point(96, 148);
-            this.nPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nPort.Margin = new System.Windows.Forms.Padding(4);
             this.nPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -421,7 +422,7 @@
             // 
             this.tbSerial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbSerial.Location = new System.Drawing.Point(96, 42);
-            this.tbSerial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbSerial.Margin = new System.Windows.Forms.Padding(4);
             this.tbSerial.Name = "tbSerial";
             this.tbSerial.ReadOnly = true;
             this.tbSerial.Size = new System.Drawing.Size(156, 35);
@@ -441,8 +442,8 @@
             // 
             this.panel2.Controls.Add(this.button4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(296, 906);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Location = new System.Drawing.Point(296, 1125);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(988, 80);
             this.panel2.TabIndex = 1;
@@ -450,7 +451,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(390, 16);
-            this.button4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button4.Margin = new System.Windows.Forms.Padding(6);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(150, 46);
             this.button4.TabIndex = 0;
@@ -464,18 +465,18 @@
             this.panel3.Controls.Add(this.richTextBox1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(296, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(988, 906);
+            this.panel3.Size = new System.Drawing.Size(988, 1125);
             this.panel3.TabIndex = 2;
             // 
             // rtbLog
             // 
             this.rtbLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbLog.Location = new System.Drawing.Point(0, 0);
-            this.rtbLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtbLog.Margin = new System.Windows.Forms.Padding(4);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(988, 906);
+            this.rtbLog.Size = new System.Drawing.Size(988, 1125);
             this.rtbLog.TabIndex = 9;
             this.rtbLog.Text = "";
             this.rtbLog.TextChanged += new System.EventHandler(this.rtbLog_TextChanged);
@@ -484,9 +485,9 @@
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(988, 906);
+            this.richTextBox1.Size = new System.Drawing.Size(988, 1125);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -494,14 +495,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 986);
+            this.ClientSize = new System.Drawing.Size(1284, 1135);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
             this.Text = "DTU.Test";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
